@@ -16,17 +16,17 @@ defmodule BettyMemory.Test.Core.BankTest do
     end
 
     test "should upsert initial_value" do
-      _value = :rand.uniform(1_000)
+      value = :rand.uniform(1_000)
 
       attributes = %{
         name: "Bank #{:rand.uniform(1_000)}",
-        value: _value,
+        value: value,
         stake_percentage: :rand.uniform(0_1),
         status: 1
       }
 
       bank = Bank.new(attributes)
-      assert _value = bank.initial_value
+      assert bank.initial_value == value
     end
   end
 end

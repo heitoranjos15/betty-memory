@@ -1,4 +1,6 @@
 defmodule BettyMemory.Core.Bank do
+  alias IO
+
   @type t :: %__MODULE__{
           name: String.t(),
           initial_value: Float.t(),
@@ -16,17 +18,17 @@ defmodule BettyMemory.Core.Bank do
   @spec new(Enum.t()) :: t
   def new(attributes) do
     attributes
-    |> upsert_initial_value
+    |> upsert_initial_value()
     |> (&struct!(__MODULE__, &1)).()
   end
 
   defp upsert_initial_value(attributes) do
     has_key = Map.has_key?(attributes, :initial_value)
 
-    unless has_key do
+    if not has_key do
       Map.put_new(attributes, :initial_value, attributes.value)
+    else
+      attributes
     end
-
-    attributes
   end
 end

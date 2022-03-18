@@ -5,7 +5,7 @@ defmodule BettyMemory.Test.Core.Rule do
 
   describe "new/1" do
     test "should create a rule" do
-      attributes = ruleData()
+      attributes = rule_data()
       assert %Rule{} = Rule.new(attributes)
     end
   end
