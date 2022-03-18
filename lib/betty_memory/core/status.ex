@@ -5,12 +5,11 @@ defmodule BettyMemory.Core.Status do
   }
 
   @spec add_status(Map.t(), Atom.t()) :: Map.t()
-  def add_status(entity, status) when is_map(entity) do
-    translated_status =
+  def add_status(entity, code) when is_map(entity) do
+    status_value =
       @status_enum
-      |> Map.get(status)
+      |> Map.get(code)
 
-    entity
-    |> Map.put_new(translated_status)
+    Map.put_new(entity, :status, status_value)
   end
 end

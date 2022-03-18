@@ -2,9 +2,8 @@ defmodule BettyMemory.Core.Approach do
   @moduledoc """
   """
   alias BettyMemory.Core.Rule
-  alias BettyMemory.Core.Sport
-  alias BettyMemory.Core.ExitReason
   alias BettyMemory.Core.Market
+  alias BettyMemory.Core.Bank
 
   @typedoc """
 
@@ -12,28 +11,33 @@ defmodule BettyMemory.Core.Approach do
   @type t :: %__MODULE__{
           name: String.t(),
           description: String.t(),
-          minimal_odd: Float.t(),
-          maximun_odd: Float.t(),
-          sport: Sport.t(),
-          bank_id: Integer.t(),
+          min_odd: Float.t(),
+          max_odd: Float.t(),
+          bank: Bank.t(),
           market: Market.t(),
           rules: [Rule.t()],
-          exit_reason: [ExitReason.t()]
+          status: Integer.t()
         }
 
-  @enforce_keys [:name, :description]
+  @enforce_keys [:name, :description, :min_odd, :max_odd, :bank, :market, :rules, :status]
   defstruct name: "",
             description: "",
-            minimal_odd: 0.0,
-            maximun_odd: 0.0,
-            sport: nil,
-            bank_id: 0,
+            min_odd: 0.0,
+            max_odd: 0.0,
             market: 0,
+            bank: [],
             rules: [],
-            exit_reason: []
+            status: 0
+
+  @min_rules 4
 
   @spec new(Enum.t()) :: t
-  def new(attributes) do
+  def new(attributes) when length(attributes.rules) > @min_rules do
+    # def new(attributes) do
     struct!(__MODULE__, attributes)
+  end
+
+  def new(attributes) when length(attributes.rules) <= @min_rules do
+    {:error, "min rules required are #{@min_rules}"}
   end
 end
