@@ -33,7 +33,6 @@ defmodule BettyMemory.Core.Approach do
 
   @spec new(Enum.t()) :: t
   def new(attributes) when length(attributes.rules) > @min_rules do
-    # def new(attributes) do
     struct!(__MODULE__, attributes)
   end
 

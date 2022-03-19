@@ -26,7 +26,7 @@ defmodule BettyMemory.Core.Bank do
     has_key = Map.has_key?(attributes, :initial_value)
 
     if not has_key do
-      Map.put_new(attributes, :initial_value, attributes.value)
+      Map.put(attributes, :initial_value, attributes.value)
     else
       attributes
     end

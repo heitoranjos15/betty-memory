@@ -10,6 +10,6 @@ defmodule BettyMemory.Core.Status do
       @status_enum
       |> Map.get(code)
 
-    Map.put_new(entity, :status, status_value)
+    Map.put(entity, :status, status_value)
   end
 end
