@@ -32,11 +32,11 @@ defmodule BettyMemory.Core.Approach do
   @min_rules 4
 
   @spec new(Enum.t()) :: t
-  def new(attributes) when length(attributes.rules) > @min_rules do
+  def new(attributes) when length(attributes.rules) >= @min_rules do
     struct!(__MODULE__, attributes)
   end
 
-  def new(attributes) when length(attributes.rules) <= @min_rules do
+  def new(attributes) when length(attributes.rules) < @min_rules do
     {:error, "min rules required are #{@min_rules}"}
   end
 end

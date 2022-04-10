@@ -27,6 +27,25 @@ defmodule BettyMemory.Test.Core.ApproachTest do
       assert %Approach{} = Approach.new(attributes)
     end
 
+    test "create a new approach when rules are 4" do
+      rules = rules_data_list(4)
+      bank = bank_data()
+      market = market_data()
+
+      attributes = %{
+        name: "Approach #{:rand.uniform(1_000)}",
+        description: "description approach",
+        min_odd: 1.8,
+        max_odd: 3.0,
+        bank: bank,
+        market: market,
+        rules: rules,
+        status: 1
+      }
+
+      assert %Approach{} = Approach.new(attributes)
+    end
+
     test "return a error when rules are less than minimal" do
       rules = rules_data_list(1)
       bank = bank_data()
