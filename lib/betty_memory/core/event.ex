@@ -1,6 +1,7 @@
 defmodule BettyMemory.Core.Event do
   alias BettyMemory.Core.Team
   alias BettyMemory.Core.Sport
+  alias BettyMemory.Core.Tournament
 
   @typedoc """
   """
@@ -8,13 +9,15 @@ defmodule BettyMemory.Core.Event do
           start_date: Date.t(),
           local: String.t(),
           teams: [Team.t()],
+          tournament: Tournament.t(),
           sport: Sport.t()
         }
 
-  @enforce_keys [:start_date, :local, :teams, :sport]
+  @enforce_keys [:start_date, :local, :teams, :tournament, :sport]
   defstruct start_date: DateTime.utc_now(),
             local: "",
             teams: [],
+            tournament: "",
             sport: ""
 
   @min_teams 2
@@ -24,6 +27,6 @@ defmodule BettyMemory.Core.Event do
   end
 
   def new(_) do
-    {:error, "min team for a new event is #{@min_teams}"}
+    {:error, "min teams to create a new event is #{@min_teams}"}
   end
 end

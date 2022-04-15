@@ -16,4 +16,18 @@ defmodule BettyMemory.Test.Seed.TeamSeed do
 
     Team.new(attributes)
   end
+
+  def teams_data_list(length) do
+    teams_data_list([], length)
+  end
+
+  defp teams_data_list(list, 0) do
+    list
+  end
+
+  defp teams_data_list(list, length) when length > 0 do
+    count = length - 1
+    newList = [team_data() | list]
+    teams_data_list(newList, count)
+  end
 end
